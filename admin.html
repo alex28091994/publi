@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/shop3.jpg" type="image/x-icon">
+  <meta name="description" content="Painel Administrativo - Classificados de Serviços">
+  
+  <title>Painel Administrativo - Classificados de Serviços</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=X6kQe1" type="text/css">
+
+  <style>
+    :root {
+      --admin-primary: #2c3e50;
+      --admin-secondary: #34495e;
+      --admin-accent: #3498db;
+      --admin-success: #2ecc71;
+      --admin-danger: #e74c3c;
+      --admin-warning: #f1c40f;
+    }
+
+    body {
+      background-color: #f5f6fa;
+    }
+
+    /* Login Screen */
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
+    }
+
+    .login-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+
+    /* Admin Dashboard */
+    .admin-container {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: var(--admin-primary);
+      color: white;
+      min-height: 100vh;
+      padding: 1rem;
+      position: fixed;
+      width: 250px;
+    }
+
+    .sidebar-header {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-menu a {
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      display: block;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-menu a:hover,
+    .sidebar-menu a.active {
+      background: var(--admin-accent);
+    }
+
+    .sidebar-menu i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 2rem;
+    }
+
+    .admin-header {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .admin-table th {
+      background: #f8f9fa;
+      padding: 1rem;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .admin-table td {
+      padding: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-action {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-edit {
+      background: var(--admin-warning);
+      color: white;
+    }
+
+    .btn-delete {
+      background: var(--admin-danger);
+      color: white;
+    }
+
+    .btn-add {
+      background: var(--admin-success);
+      color: white;
+    }
+
+    .modal-content {
+      border-radius: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .stats-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .stat-card i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--admin-accent);
+    }
+
+    .stat-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      color: #666;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-container" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="assets/images/shop3.jpg" alt="Admin Logo">
+      <h2 class="mt-3">Painel Administrativo</h2>
+    </div>
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Usuário</label>
+        <input type="text" class="form-control" id="username" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Senha</label>
+        <input type="password" class="form-control" id="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+    </form>
+  </div>
+</div>
+
+<!-- Admin Dashboard -->
+<div class="admin-container" id="adminDashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h4>Painel Admin</h4>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i>Dashboard</a></li>
+      <li><a href="#" onclick="showSection('classificados')"><i class="fas fa-list"></i>Classificados</a></li>
+      <li><a href="#" onclick="showSection('stories')"><i class="fas fa-images"></i>Stories</a></li>
+      <li><a href="#" onclick="showSection('topicos')"><i class="fas fa-tags"></i>Tópicos</a></li>
+      <li><a href="#" onclick="showSection('sobre')"><i class="fas fa-info-circle"></i>Página Sobre</a></li>
+      <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i>Sair</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Dashboard Section -->
+    <div class="section" id="dashboardSection">
+      <div class="admin-header">
+        <h2>Dashboard</h2>
+        <div class="user-info">
+          <span>Admin</span>
+          <i class="fas fa-user-circle ms-2"></i>
+        </div>
+      </div>
+
+      <div class="stats-cards">
+        <div class="stat-card">
+          <i class="fas fa-list"></i>
+          <h3 id="totalClassificados">0</h3>
+          <p>Classificados Ativos</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-images"></i>
+          <h3 id="totalStories">0</h3>
+          <p>Stories Ativos</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-clock"></i>
+          <h3 id="storiesPendentes">0</h3>
+          <p>Stories Pendentes</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-euro-sign"></i>
+          <h3 id="totalPagamentos">€0</h3>
+          <p>Pagamentos Pendentes</p>
+        </div>
+      </div>
+
+      <!-- Stories Pendentes -->
+      <div class="admin-card">
+        <h3>Stories Pendentes de Aprovação</h3>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Categoria</th>
+                <th>Valor</th>
+                <th>Duração</th>
+                <th>Status</th>
+                <th>Data</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="pendingStoriesTable">
+              <!-- Será preenchido via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Stories Ativos -->
+      <div class="admin-card">
+        <h3>Stories Ativos</h3>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Categoria</th>
+                <th>Valor</th>
+                <th>Expira em</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="activeStoriesTable">
+              <!-- Será preenchido via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Informações de Pagamento -->
+      <div class="admin-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>Informações de Pagamento</h3>
+          <button class="btn btn-primary" onclick="savePaymentInfo()">
+            <i class="fas fa-save"></i> Salvar Alterações
+          </button>
+        </div>
+        
+        <div class="row">
+          <!-- MBWay -->
+          <div class="col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                  <i class="fas fa-mobile-alt"></i> MBWay
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="form-group mb-3">
+                  <label class="form-label">Número MBWay</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="dashboardMbwayNumber" 
+                           placeholder="Ex: 912 345 678">
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('dashboardMbwayNumber')">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="dashboardMbwayEnabled">
+                  <label class="form-check-label">Ativar MBWay</label>
+                </div>
+                <div class="mt-3">
+                  <h6>Instruções para Clientes:</h6>
+                  <ol class="small">
+                    <li>Abra o aplicativo MBWay</li>
+                    <li>Escolha "Pagar com MBWay"</li>
+                    <li>Digite o número acima</li>
+                    <li>Confirme o valor exato</li>
+                    <li>Anote a referência gerada</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transferência Bancária -->
+          <div class="col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                  <i class="fas fa-university"></i> Transferência Bancária
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="form-group mb-3">
+                  <label class="form-label">Nome do Banco</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="dashboardBankName" 
+                           placeholder="Nome do banco">
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('dashboardBankName')">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label">IBAN</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="dashboardBankIban" 
+                           placeholder="PT50 XXXX XXXX XXXX XXXX XXXX X">
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('dashboardBankIban')">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label">NIF</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="dashboardBankNif" 
+                           placeholder="123 456 789">
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('dashboardBankNif')">
+                      <i class="fas fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="dashboardTransferEnabled">
+                  <label class="form-check-label">Ativar Transferência</label>
+                </div>
+                <div class="mt-3">
+                  <h6>Instruções para Clientes:</h6>
+                  <ol class="small">
+                    <li>Faça a transferência para os dados acima</li>
+                    <li>Use o NIF como referência</li>
+                    <li>Confirme o valor exato</li>
+                    <li>Guarde o comprovativo</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Classificados Section -->
+    <div class="section" id="classificadosSection" style="display: none;">
+      <div class="admin-header">
+        <h2>Gerenciar Classificados</h2>
+        <button class="btn btn-add" onclick="showAddClassificadoModal()">
+          <i class="fas fa-plus"></i> Novo Classificado
+        </button>
+      </div>
+
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Empresa</th>
+                <th>Categoria</th>
+                <th>Título</th>
+                <th>Valor</th>
+                <th>Contato</th>
+                <th>Expira em</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="classificadosTableBody">
+              <!-- Dados serão inseridos via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stories Section -->
+    <div class="section" id="storiesSection" style="display: none;">
+      <div class="admin-header">
+        <h2>Gerenciar Stories</h2>
+        <button class="btn btn-add" onclick="showAddStoryModal()">
+          <i class="fas fa-plus"></i> Novo Story
+        </button>
+      </div>
+
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Categoria</th>
+                <th>Imagem</th>
+                <th>Contato</th>
+                <th>Expira em</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="storiesTableBody">
+              <!-- Dados serão inseridos via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tópicos Section -->
+    <div class="section" id="topicosSection" style="display: none;">
+      <div class="admin-header">
+        <h2>Gerenciar Tópicos</h2>
+        <button class="btn btn-add" onclick="showAddTopicoModal()">
+          <i class="fas fa-plus"></i> Novo Tópico
+        </button>
+      </div>
+
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Classificados</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="topicosTableBody">
+              <!-- Dados serão inseridos via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sobre Section -->
+    <div class="section" id="sobreSection" style="display: none;">
+      <div class="admin-header">
+        <h2>Gerenciar Página Sobre</h2>
+        <button class="btn btn-primary" onclick="saveSobreInfo()">
+          <i class="fas fa-save"></i> Salvar Alterações
+        </button>
+      </div>
+
+      <div class="admin-card">
+        <form id="sobreForm">
+          <!-- Sobre a Empresa -->
+          <div class="mb-4">
+            <h4 class="mb-3">Sobre a Empresa</h4>
+            <div class="form-group">
+              <label class="form-label">Título Principal</label>
+              <input type="text" class="form-control" id="sobreTitulo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Descrição da Empresa</label>
+              <textarea class="form-control" id="sobreDescricao" rows="4" required></textarea>
+              <small class="text-muted">Descreva a empresa e sua missão principal</small>
+            </div>
+          </div>
+
+          <!-- Termos de Uso e Responsabilidades -->
+          <div class="mb-4">
+            <h4 class="mb-3">Termos de Uso e Responsabilidades</h4>
+            
+            <div class="form-group">
+              <label class="form-label">Aviso Importante</label>
+              <textarea class="form-control" id="avisoImportante" rows="3" required></textarea>
+              <small class="text-muted">Este aviso será exibido em destaque na página</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Nossa Responsabilidade</label>
+              <div id="responsabilidadesList">
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control responsabilidade-item" placeholder="Digite uma responsabilidade">
+                  <button type="button" class="btn btn-danger" onclick="removeItem(this, 'responsabilidade')"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-secondary mt-2" onclick="addItem('responsabilidadesList', 'responsabilidade')">
+                <i class="fas fa-plus"></i> Adicionar Responsabilidade
+              </button>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">O que Não Fazemos</label>
+              <div id="naoFazemosList">
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control naoFazemos-item" placeholder="Digite um item">
+                  <button type="button" class="btn btn-danger" onclick="removeItem(this, 'naoFazemos')"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-secondary mt-2" onclick="addItem('naoFazemosList', 'naoFazemos')">
+                <i class="fas fa-plus"></i> Adicionar Item
+              </button>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Recomendações aos Usuários</label>
+              <div id="recomendacoesList">
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control recomendacao-item" placeholder="Digite uma recomendação">
+                  <button type="button" class="btn btn-danger" onclick="removeItem(this, 'recomendacao')"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-secondary mt-2" onclick="addItem('recomendacoesList', 'recomendacao')">
+                <i class="fas fa-plus"></i> Adicionar Recomendação
+              </button>
+            </div>
+          </div>
+
+          <!-- SAC (Serviço de Atendimento ao Cliente) -->
+          <div class="mb-4">
+            <h4 class="mb-3">SAC - Serviço de Atendimento ao Cliente</h4>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Email de Contato</label>
+                  <input type="email" class="form-control" id="sacEmail" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Telefone</label>
+                  <input type="tel" class="form-control" id="sacTelefone" placeholder="+351 XXX XXX XXX" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">WhatsApp</label>
+              <input type="tel" class="form-control" id="sacWhatsApp" placeholder="+351 XXX XXX XXX" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Horário de Atendimento</label>
+              <input type="text" class="form-control" id="sacHorario" placeholder="Ex: Segunda a Sexta, 9h às 18h" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Como Podemos Ajudar</label>
+              <div id="ajudaList">
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control ajuda-item" placeholder="Digite um tipo de ajuda">
+                  <button type="button" class="btn btn-danger" onclick="removeItem(this, 'ajuda')"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-secondary mt-2" onclick="addItem('ajudaList', 'ajuda')">
+                <i class="fas fa-plus"></i> Adicionar Item
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tab de Pagamentos -->
+    <div class="tab-pane fade" id="tab-payment">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Configurações de Pagamento</h3>
+        </div>
+        <div class="card-body">
+          <!-- Opções de Story -->
+          <div class="mb-4">
+            <h4>Opções de Story</h4>
+            <div class="table-responsive">
+              <table class="table" id="storyOptionsTable">
+                <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Valor (€)</th>
+                    <th>Duração (dias)</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Será preenchido via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+            <button class="btn btn-primary mt-3" onclick="addStoryOption()">
+              <i class="fas fa-plus"></i> Adicionar Opção
+            </button>
+          </div>
+
+          <!-- Métodos de Pagamento -->
+          <div class="mb-4">
+            <h4>Métodos de Pagamento</h4>
+            <div class="row">
+              <!-- MBWay -->
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="fas fa-mobile-alt"></i> MBWay
+                    </h5>
+                    <div class="form-group">
+                      <label>Número MBWay</label>
+                      <input type="text" class="form-control" id="mbwayNumber" 
+                             placeholder="Ex: 912 345 678">
+                    </div>
+                    <div class="form-check mt-3">
+                      <input type="checkbox" class="form-check-input" id="mbwayEnabled">
+                      <label class="form-check-label">Ativar MBWay</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Transferência Bancária -->
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="fas fa-university"></i> Transferência Bancária
+                    </h5>
+                    <div class="form-group">
+                      <label>Banco</label>
+                      <input type="text" class="form-control" id="bankName" 
+                             placeholder="Nome do banco">
+                    </div>
+                    <div class="form-group mt-2">
+                      <label>IBAN</label>
+                      <input type="text" class="form-control" id="bankIban" 
+                             placeholder="PT50 XXXX XXXX XXXX XXXX XXXX X">
+                    </div>
+                    <div class="form-group mt-2">
+                      <label>NIF</label>
+                      <input type="text" class="form-control" id="bankNif" 
+                             placeholder="123 456 789">
+                    </div>
+                    <div class="form-check mt-3">
+                      <input type="checkbox" class="form-check-input" id="transferEnabled">
+                      <label class="form-check-label">Ativar Transferência</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-success" onclick="savePaymentSettings()">
+            <i class="fas fa-save"></i> Salvar Configurações
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modais -->
+<!-- Modal de Adicionar/Editar Classificado -->
+<div class="modal fade" id="classificadoModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar Classificado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="classificadoForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Nome da Empresa</label>
+                <input type="text" class="form-control" id="classificadoEmpresa" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Categoria</label>
+                <select class="form-select" id="classificadoCategoria" required>
+                  <option value="">Selecione...</option>
+                  <option value="construcao">Construção</option>
+                  <option value="domesticos">Domésticos</option>
+                  <option value="tecnologia">Tecnologia</option>
+                  <option value="beleza">Beleza</option>
+                  <option value="educacao">Educação</option>
+                  <option value="transporte">Transporte</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Título do Serviço</label>
+            <input type="text" class="form-control" id="classificadoTitulo" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control" id="classificadoDescricao" rows="3" required></textarea>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Valor</label>
+                <div class="input-group">
+                  <span class="input-group-text">€</span>
+                  <input type="number" class="form-control" id="classificadoValor" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Período</label>
+                <select class="form-select" id="classificadoPeriodo">
+                  <option value="hora">/hora</option>
+                  <option value="dia">/dia</option>
+                  <option value="servico">/serviço</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Telefone</label>
+                <input type="tel" class="form-control" id="classificadoTelefone" placeholder="+351 XXX XXX XXX" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">WhatsApp</label>
+                <input type="tel" class="form-control" id="classificadoWhatsApp" placeholder="+351 XXX XXX XXX" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tempo de Expiração</label>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="number" class="form-control" id="classificadoExpirationValue" min="1" value="30" required>
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" id="classificadoExpirationUnit" required>
+                  <option value="days" selected>Dias</option>
+                  <option value="weeks">Semanas</option>
+                  <option value="months">Meses</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fotos</label>
+            <input type="file" class="form-control" id="classificadoFotos" accept="image/*" multiple>
+            <small class="text-muted">Máximo de 2 fotos</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="saveClassificado()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Adicionar/Editar Story -->
+<div class="modal fade" id="storyModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar Story</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="storyForm">
+          <div class="form-group">
+            <label class="form-label">Título</label>
+            <input type="text" class="form-control" id="storyTitle" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Categoria</label>
+            <select class="form-select" id="storyCategory" required>
+              <option value="">Selecione...</option>
+              <option value="construcao">Construção</option>
+              <option value="domesticos">Domésticos</option>
+              <option value="tecnologia">Tecnologia</option>
+              <option value="beleza">Beleza</option>
+              <option value="educacao">Educação</option>
+              <option value="transporte">Transporte</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Imagem</label>
+            <input type="file" class="form-control" id="storyImage" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control" id="storyDescription" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Número de Contato</label>
+            <input type="tel" class="form-control" id="storyContact" placeholder="+351 XXX XXX XXX" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tempo de Expiração</label>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="number" class="form-control" id="storyExpirationValue" min="1" value="1" required>
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" id="storyExpirationUnit" required>
+                  <option value="hours">Horas</option>
+                  <option value="days" selected>Dias</option>
+                  <option value="weeks">Semanas</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="saveStory()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Adicionar/Editar Tópico -->
+<div class="modal fade" id="topicoModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar Tópico</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="topicoForm">
+          <div class="form-group">
+            <label class="form-label">Nome do Tópico</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Categoria</label>
+            <select class="form-select" required>
+              <option value="">Selecione...</option>
+              <option value="construcao">Construção</option>
+              <option value="domesticos">Domésticos</option>
+              <option value="tecnologia">Tecnologia</option>
+              <option value="beleza">Beleza</option>
+              <option value="educacao">Educação</option>
+              <option value="transporte">Transporte</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control" rows="3" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="saveTopico()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script>
+<script src="assets/ytplayer/index.js"></script>
+<script src="assets/dropdown/js/navbar-dropdown.js"></script>
+<script src="assets/theme/js/script.js"></script>
+
+<script>
+// Credenciais de acesso (em produção, isso deve estar em um backend seguro)
+const ADMIN_CREDENTIALS = {
+  username: 'admin',
+  password: 'admin123'
+};
+
+// Função de login
+function handleLogin(event) {
+  event.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminDashboard').style.display = 'block';
+    // Aqui você pode adicionar um token de sessão ou outras medidas de segurança
+  } else {
+    alert('Usuário ou senha incorretos!');
+  }
+}
+
+// Função de logout
+function logout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminDashboard').style.display = 'none';
+  document.getElementById('loginForm').reset();
+}
+
+// Função para alternar entre as seções
+function showSection(sectionName) {
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(section => section.style.display = 'none');
+  
+  document.getElementById(`${sectionName}Section`).style.display = 'block';
+  
+  // Atualiza o menu ativo
+  document.querySelectorAll('.sidebar-menu a').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('onclick').includes(sectionName)) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Funções para os modais
+function showAddClassificadoModal() {
+  const modal = new bootstrap.Modal(document.getElementById('classificadoModal'));
+  modal.show();
+}
+
+function showAddStoryModal() {
+  const modal = new bootstrap.Modal(document.getElementById('storyModal'));
+  modal.show();
+}
+
+function showAddTopicoModal() {
+  const modal = new bootstrap.Modal(document.getElementById('topicoModal'));
+  modal.show();
+}
+
+// Estrutura de dados para classificados
+let classificados = [];
+
+// Função para salvar classificado
+function saveClassificado() {
+  const form = document.getElementById('classificadoForm');
+  const empresa = document.getElementById('classificadoEmpresa').value;
+  const categoria = document.getElementById('classificadoCategoria').value;
+  const titulo = document.getElementById('classificadoTitulo').value;
+  const descricao = document.getElementById('classificadoDescricao').value;
+  const valor = document.getElementById('classificadoValor').value;
+  const periodo = document.getElementById('classificadoPeriodo').value;
+  const telefone = document.getElementById('classificadoTelefone').value;
+  const whatsapp = document.getElementById('classificadoWhatsApp').value;
+  const expirationValue = document.getElementById('classificadoExpirationValue').value;
+  const expirationUnit = document.getElementById('classificadoExpirationUnit').value;
+  
+  // Calcular data de expiração
+  const expirationDate = new Date();
+  switch(expirationUnit) {
+    case 'days':
+      expirationDate.setDate(expirationDate.getDate() + parseInt(expirationValue));
+      break;
+    case 'weeks':
+      expirationDate.setDate(expirationDate.getDate() + (parseInt(expirationValue) * 7));
+      break;
+    case 'months':
+      expirationDate.setMonth(expirationDate.getMonth() + parseInt(expirationValue));
+      break;
+  }
+
+  const classificado = {
+    id: Date.now(),
+    empresa,
+    categoria,
+    titulo,
+    descricao,
+    valor: `€ ${valor}/${periodo}`,
+    telefone,
+    whatsapp,
+    fotos: Array.from(document.getElementById('classificadoFotos').files).map(file => file.name),
+    expirationDate: expirationDate.toISOString(),
+    createdAt: new Date().toISOString(),
+    status: 'active'
+  };
+
+  classificados.push(classificado);
+  updateClassificadosTable();
+  
+  // Salvar no localStorage (em produção, isso seria salvo no backend)
+  localStorage.setItem('classificados', JSON.stringify(classificados));
+  
+  const modal = bootstrap.Modal.getInstance(document.getElementById('classificadoModal'));
+  modal.hide();
+  form.reset();
+}
+
+// Função para atualizar a tabela de classificados
+function updateClassificadosTable() {
+  const tbody = document.getElementById('classificadosTableBody');
+  tbody.innerHTML = '';
+  
+  // Verificar classificados expirados
+  const now = new Date();
+  classificados = classificados.filter(classificado => {
+    const expirationDate = new Date(classificado.expirationDate);
+    if (expirationDate < now) {
+      classificado.status = 'expired';
+      return false; // Remove classificados expirados
+    }
+    return true;
+  });
+
+  classificados.forEach(classificado => {
+    const expirationDate = new Date(classificado.expirationDate);
+    const timeLeft = getTimeLeft(expirationDate);
+    
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>#${classificado.id}</td>
+      <td>${classificado.empresa}</td>
+      <td>${classificado.categoria}</td>
+      <td>${classificado.titulo}</td>
+      <td>${classificado.valor}</td>
+      <td>
+        <div class="d-flex flex-column">
+          <small>Tel: ${classificado.telefone}</small>
+          <small>Whats: ${classificado.whatsapp}</small>
+        </div>
+      </td>
+      <td>${timeLeft}</td>
+      <td><span class="badge bg-success">Ativo</span></td>
+      <td>
+        <div class="action-buttons">
+          <button class="btn-action btn-edit" onclick="editClassificado(${classificado.id})"><i class="fas fa-edit"></i></button>
+          <button class="btn-action btn-delete" onclick="deleteClassificado(${classificado.id})"><i class="fas fa-trash"></i></button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+// Função para calcular o tempo restante
+function getTimeLeft(expirationDate) {
+  const now = new Date();
+  const diff = expirationDate - now;
+  
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  
+  if (days > 0) {
+    return `${days}d ${hours}h`;
+  }
+  return `${hours}h`;
+}
+
+// Função para editar classificado
+function editClassificado(id) {
+  const classificado = classificados.find(c => c.id === id);
+  if (classificado) {
+    document.getElementById('classificadoEmpresa').value = classificado.empresa;
+    document.getElementById('classificadoCategoria').value = classificado.categoria;
+    document.getElementById('classificadoTitulo').value = classificado.titulo;
+    document.getElementById('classificadoDescricao').value = classificado.descricao;
+    
+    // Extrair valor e período
+    const valorMatch = classificado.valor.match(/€ (\d+)\/(\w+)/);
+    if (valorMatch) {
+      document.getElementById('classificadoValor').value = valorMatch[1];
+      document.getElementById('classificadoPeriodo').value = valorMatch[2];
+    }
+    
+    document.getElementById('classificadoTelefone').value = classificado.telefone;
+    document.getElementById('classificadoWhatsApp').value = classificado.whatsapp;
+    
+    // Calcular tempo restante para expiração
+    const expirationDate = new Date(classificado.expirationDate);
+    const now = new Date();
+    const diff = expirationDate - now;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    if (days > 30) {
+      const months = Math.floor(days / 30);
+      document.getElementById('classificadoExpirationValue').value = months;
+      document.getElementById('classificadoExpirationUnit').value = 'months';
+    } else if (days > 7) {
+      const weeks = Math.floor(days / 7);
+      document.getElementById('classificadoExpirationValue').value = weeks;
+      document.getElementById('classificadoExpirationUnit').value = 'weeks';
+    } else {
+      document.getElementById('classificadoExpirationValue').value = days;
+      document.getElementById('classificadoExpirationUnit').value = 'days';
+    }
+    
+    showAddClassificadoModal();
+  }
+}
+
+// Função para deletar classificado
+function deleteClassificado(id) {
+  if (confirm('Tem certeza que deseja excluir este classificado?')) {
+    classificados = classificados.filter(c => c.id !== id);
+    updateClassificadosTable();
+    localStorage.setItem('classificados', JSON.stringify(classificados));
+  }
+}
+
+// Carregar classificados do localStorage ao iniciar
+document.addEventListener('DOMContentLoaded', function() {
+  const savedClassificados = localStorage.getItem('classificados');
+  if (savedClassificados) {
+    classificados = JSON.parse(savedClassificados);
+    updateClassificadosTable();
+  }
+  
+  // Verificar classificados expirados a cada minuto
+  setInterval(updateClassificadosTable, 60000);
+});
+
+function saveStory() {
+  // Implementar lógica de salvamento
+  const modal = bootstrap.Modal.getInstance(document.getElementById('storyModal'));
+  modal.hide();
+}
+
+function saveTopico() {
+  // Implementar lógica de salvamento
+  const modal = bootstrap.Modal.getInstance(document.getElementById('topicoModal'));
+  modal.hide();
+}
+
+// Estrutura de dados para informações da página Sobre
+let sobreInfo = {
+  titulo: "Sobre Nós",
+  descricao: "",
+  missao: "",
+  visao: "",
+  sac: {
+    email: "",
+    telefone: "",
+    whatsapp: "",
+    horario: ""
+  },
+  termos: {
+    uso: "",
+    responsabilidades: "",
+    privacidade: ""
+  },
+  adicional: {
+    endereco: "",
+    facebook: "",
+    instagram: ""
+  },
+  aviso: "",
+  recomendacoes: []
+};
+
+// Funções para gerenciar itens de lista
+function addItem(containerId, type) {
+  const container = document.getElementById(containerId);
+  const div = document.createElement('div');
+  div.className = 'input-group mb-2';
+  div.innerHTML = `
+    <input type="text" class="form-control ${type}-item" placeholder="Digite um item">
+    <button type="button" class="btn btn-danger" onclick="removeItem(this, '${type}')"><i class="fas fa-times"></i></button>
+  `;
+  container.appendChild(div);
+}
+
+function removeItem(button, type) {
+  button.parentElement.remove();
+}
+
+// Função para carregar informações da página Sobre
+function loadSobreInfo() {
+  const savedInfo = localStorage.getItem('sobreInfo');
+  if (savedInfo) {
+    sobreInfo = JSON.parse(savedInfo);
+    
+    // Preencher formulário
+    document.getElementById('sobreTitulo').value = sobreInfo.titulo || '';
+    document.getElementById('sobreDescricao').value = sobreInfo.descricao || '';
+    document.getElementById('avisoImportante').value = sobreInfo.aviso || '';
+    
+    // SAC
+    document.getElementById('sacEmail').value = sobreInfo.sac?.email || '';
+    document.getElementById('sacTelefone').value = sobreInfo.sac?.telefone || '';
+    document.getElementById('sacWhatsApp').value = sobreInfo.sac?.whatsapp || '';
+    document.getElementById('sacHorario').value = sobreInfo.sac?.horario || '';
+    
+    // Listas
+    populateList('responsabilidadesList', sobreInfo.responsabilidades || [], 'responsabilidade');
+    populateList('naoFazemosList', sobreInfo.naoFazemos || [], 'naoFazemos');
+    populateList('recomendacoesList', sobreInfo.recomendacoes || [], 'recomendacao');
+    populateList('ajudaList', sobreInfo.ajuda || [], 'ajuda');
+  }
+}
+
+function populateList(containerId, items, type) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  
+  if (items.length > 0) {
+    items.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'input-group mb-2';
+      div.innerHTML = `
+        <input type="text" class="form-control ${type}-item" value="${item}">
+        <button type="button" class="btn btn-danger" onclick="removeItem(this, '${type}')"><i class="fas fa-times"></i></button>
+      `;
+      container.appendChild(div);
+    });
+  } else {
+    addItem(containerId, type);
+  }
+}
+
+// Função para salvar informações da página Sobre
+function saveSobreInfo() {
+  const form = document.getElementById('sobreForm');
+  
+  // Validar formulário
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+  
+  // Coletar itens das listas
+  const getListItems = (className) => {
+    return Array.from(document.getElementsByClassName(className))
+      .map(input => input.value.trim())
+      .filter(value => value !== '');
+  };
+  
+  // Atualizar objeto sobreInfo
+  sobreInfo = {
+    titulo: document.getElementById('sobreTitulo').value,
+    descricao: document.getElementById('sobreDescricao').value,
+    aviso: document.getElementById('avisoImportante').value,
+    sac: {
+      email: document.getElementById('sacEmail').value,
+      telefone: document.getElementById('sacTelefone').value,
+      whatsapp: document.getElementById('sacWhatsApp').value,
+      horario: document.getElementById('sacHorario').value
+    },
+    responsabilidades: getListItems('responsabilidade-item'),
+    naoFazemos: getListItems('naoFazemos-item'),
+    recomendacoes: getListItems('recomendacao-item'),
+    ajuda: getListItems('ajuda-item')
+  };
+  
+  // Salvar no localStorage
+  localStorage.setItem('sobreInfo', JSON.stringify(sobreInfo));
+  
+  // Mostrar mensagem de sucesso
+  alert('Informações salvas com sucesso!');
+}
+
+// Carregar informações ao mostrar a seção
+document.addEventListener('DOMContentLoaded', function() {
+  // ... existing code ...
+  
+  // Adicionar listener para carregar informações quando a seção sobre for mostrada
+  document.querySelector('a[onclick="showSection(\'sobre\')"]').addEventListener('click', loadSobreInfo);
+});
+
+// Funções para gerenciar stories
+function loadStories() {
+  const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+  const tbody = document.getElementById('storiesTableBody');
+  tbody.innerHTML = '';
+
+  stories.forEach(story => {
+    const row = document.createElement('tr');
+    const statusClass = {
+      'pending_payment': 'warning',
+      'pending': 'info',
+      'approved': 'success',
+      'rejected': 'danger',
+      'expired': 'secondary'
+    }[story.status];
+
+    const statusText = {
+      'pending_payment': 'Aguardando Pagamento',
+      'pending': 'Aguardando Aprovação',
+      'approved': 'Aprovado',
+      'rejected': 'Rejeitado',
+      'expired': 'Expirado'
+    }[story.status];
+
+    const isExpired = new Date(story.expirationDate) < new Date();
+    if (isExpired && story.status === 'approved') {
+      story.status = 'expired';
+    }
+
+    row.innerHTML = `
+      <td>
+        ${story.title}
+        ${story.isPremium ? '<span class="badge bg-warning ms-2"><i class="fas fa-crown"></i> Premium</span>' : ''}
+      </td>
+      <td>${story.category}</td>
+      <td>€${story.paymentAmount.toFixed(2)}</td>
+      <td>
+        <span class="badge bg-${statusClass}">${statusText}</span>
+        ${story.paymentMethod ? `<br><small>${story.paymentMethod === 'mbway' ? 'MBWay' : 'Transferência'}</small>` : ''}
+        ${story.paymentReference ? `<br><small>Ref: ${story.paymentReference}</small>` : ''}
+      </td>
+      <td>
+        <small>
+          Submissão: ${new Date(story.submissionDate).toLocaleDateString()}<br>
+          Expira: ${new Date(story.expirationDate).toLocaleDateString()}
+        </small>
+      </td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-info" onclick="viewStory(${story.id})" title="Ver Detalhes">
+            <i class="fas fa-eye"></i>
+          </button>
+          ${story.status === 'pending_payment' ? `
+            <button class="btn btn-sm btn-success" onclick="confirmPayment(${story.id})" title="Confirmar Pagamento">
+              <i class="fas fa-check"></i>
+            </button>
+          ` : ''}
+          ${story.status === 'pending' ? `
+            <button class="btn btn-sm btn-success" onclick="approveStory(${story.id})" title="Aprovar">
+              <i class="fas fa-check"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="rejectStory(${story.id})" title="Rejeitar">
+              <i class="fas fa-times"></i>
+            </button>
+          ` : ''}
+          <button class="btn btn-sm btn-danger" onclick="deleteStory(${story.id})" title="Excluir">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+function filterStories() {
+  const statusFilter = document.getElementById('storyStatusFilter').value;
+  const categoryFilter = document.getElementById('storyCategoryFilter').value;
+  const typeFilter = document.getElementById('storyTypeFilter').value;
+  const searchFilter = document.getElementById('storySearchFilter').value.toLowerCase();
+
+  const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+  const tbody = document.getElementById('storiesTableBody');
+  tbody.innerHTML = '';
+
+  const filteredStories = stories.filter(story => {
+    const matchesStatus = statusFilter === 'all' || story.status === statusFilter;
+    const matchesCategory = categoryFilter === 'all' || story.category === categoryFilter;
+    const matchesType = typeFilter === 'all' || 
+      (typeFilter === 'premium' && story.isPremium) || 
+      (typeFilter === 'normal' && !story.isPremium);
+    const matchesSearch = story.title.toLowerCase().includes(searchFilter);
+
+    return matchesStatus && matchesCategory && matchesType && matchesSearch;
+  });
+
+  filteredStories.forEach(story => {
+    // ... (mesmo código do loadStories para criar as rows)
+  });
+}
+
+function viewStory(id) {
+  const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+  const story = stories.find(s => s.id === id);
+  if (story) {
+    // Criar e mostrar modal com detalhes do story
+    const modal = new bootstrap.Modal(document.createElement('div'));
+    modal.element.innerHTML = `
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Detalhes do Story</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h6>Informações Básicas</h6>
+                <p><strong>Título:</strong> ${story.title}</p>
+                <p><strong>Categoria:</strong> ${story.category}</p>
+                <p><strong>Descrição:</strong> ${story.description}</p>
+              </div>
+              <div class="col-md-6">
+                <h6>Contato</h6>
+                <p><strong>Telefone:</strong> ${story.phone}</p>
+                <p><strong>WhatsApp:</strong> ${story.whatsapp}</p>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <h6>Pagamento</h6>
+                <p><strong>Valor:</strong> €${story.paymentAmount.toFixed(2)}</p>
+                <p><strong>Método:</strong> ${story.paymentMethod === 'mbway' ? 'MBWay' : 'Transferência'}</p>
+                <p><strong>Referência:</strong> ${story.paymentReference}</p>
+              </div>
+              <div class="col-md-6">
+                <h6>Status</h6>
+                <p><strong>Status Atual:</strong> ${story.status}</p>
+                <p><strong>Data de Submissão:</strong> ${new Date(story.submissionDate).toLocaleDateString()}</p>
+                <p><strong>Data de Expiração:</strong> ${new Date(story.expirationDate).toLocaleDateString()}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal.element);
+    modal.show();
+    modal.element.addEventListener('hidden.bs.modal', () => {
+      document.body.removeChild(modal.element);
+    });
+  }
+}
+
+function confirmPayment(id) {
+  if (confirm('Confirmar o pagamento deste story?')) {
+    const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+    const storyIndex = stories.findIndex(s => s.id === id);
+    if (storyIndex !== -1) {
+      stories[storyIndex].status = 'pending';
+      stories[storyIndex].paymentStatus = 'confirmed';
+      localStorage.setItem('stories', JSON.stringify(stories));
+      loadStories();
+      showAlert('success', 'Pagamento confirmado com sucesso!');
+    }
+  }
+}
+
+function approveStory(id) {
+  if (confirm('Aprovar este story?')) {
+    const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+    const storyIndex = stories.findIndex(s => s.id === id);
+    if (storyIndex !== -1) {
+      stories[storyIndex].status = 'approved';
+      localStorage.setItem('stories', JSON.stringify(stories));
+      loadStories();
+      showAlert('success', 'Story aprovado com sucesso!');
+    }
+  }
+}
+
+function rejectStory(id) {
+  if (confirm('Rejeitar este story?')) {
+    const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+    const storyIndex = stories.findIndex(s => s.id === id);
+    if (storyIndex !== -1) {
+      stories[storyIndex].status = 'rejected';
+      localStorage.setItem('stories', JSON.stringify(stories));
+      loadStories();
+      showAlert('warning', 'Story rejeitado!');
+    }
+  }
+}
+
+function deleteStory(id) {
+  if (confirm('Tem certeza que deseja excluir este story?')) {
+    const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+    const updatedStories = stories.filter(s => s.id !== id);
+    localStorage.setItem('stories', JSON.stringify(updatedStories));
+    loadStories();
+    showAlert('success', 'Story excluído com sucesso!');
+  }
+}
+
+// Carregar stories quando a seção for aberta
+document.querySelector('a[href="#stories-section"]').addEventListener('click', loadStories);
+
+// Funções para gerenciar opções de pagamento
+function loadPaymentSettings() {
+  // Carregar opções de story
+  const storyOptions = JSON.parse(localStorage.getItem('storyOptions') || JSON.stringify([
+    { type: 'normal', value: 5, duration: 7, enabled: true },
+    { type: 'premium', value: 15, duration: 15, enabled: true }
+  ]));
+  
+  const tbody = document.querySelector('#storyOptionsTable tbody');
+  tbody.innerHTML = '';
+  
+  storyOptions.forEach((option, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <select class="form-control" onchange="updateStoryOption(${index}, 'type', this.value)">
+          <option value="normal" ${option.type === 'normal' ? 'selected' : ''}>Normal</option>
+          <option value="premium" ${option.type === 'premium' ? 'selected' : ''}>Premium</option>
+          <option value="custom" ${option.type === 'custom' ? 'selected' : ''}>Personalizado</option>
+        </select>
+      </td>
+      <td>
+        <input type="number" class="form-control" value="${option.value}" 
+               onchange="updateStoryOption(${index}, 'value', this.value)" min="5" step="0.01">
+      </td>
+      <td>
+        <input type="number" class="form-control" value="${option.duration}" 
+               onchange="updateStoryOption(${index}, 'duration', this.value)" min="1">
+      </td>
+      <td>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" 
+                 ${option.enabled ? 'checked' : ''}
+                 onchange="updateStoryOption(${index}, 'enabled', this.checked)">
+        </div>
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" onclick="removeStoryOption(${index})">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Carregar configurações de pagamento
+  const paymentSettings = JSON.parse(localStorage.getItem('paymentSettings') || JSON.stringify({
+    mbway: {
+      number: '912 345 678',
+      enabled: true
+    },
+    transfer: {
+      bank: 'Banco Exemplo',
+      iban: 'PT50 1234 5678 9012 3456 7890 1',
+      nif: '123 456 789',
+      enabled: true
+    }
+  }));
+
+  document.getElementById('mbwayNumber').value = paymentSettings.mbway.number;
+  document.getElementById('mbwayEnabled').checked = paymentSettings.mbway.enabled;
+  document.getElementById('bankName').value = paymentSettings.transfer.bank;
+  document.getElementById('bankIban').value = paymentSettings.transfer.iban;
+  document.getElementById('bankNif').value = paymentSettings.transfer.nif;
+  document.getElementById('transferEnabled').checked = paymentSettings.transfer.enabled;
+}
+
+function addStoryOption() {
+  const storyOptions = JSON.parse(localStorage.getItem('storyOptions') || '[]');
+  storyOptions.push({
+    type: 'normal',
+    value: 5,
+    duration: 7,
+    enabled: true
+  });
+  localStorage.setItem('storyOptions', JSON.stringify(storyOptions));
+  loadPaymentSettings();
+}
+
+function updateStoryOption(index, field, value) {
+  const storyOptions = JSON.parse(localStorage.getItem('storyOptions') || '[]');
+  storyOptions[index][field] = value;
+  localStorage.setItem('storyOptions', JSON.stringify(storyOptions));
+  loadPaymentSettings();
+}
+
+function removeStoryOption(index) {
+  if (!confirm('Tem certeza que deseja remover esta opção?')) return;
+  
+  const storyOptions = JSON.parse(localStorage.getItem('storyOptions') || '[]');
+  storyOptions.splice(index, 1);
+  localStorage.setItem('storyOptions', JSON.stringify(storyOptions));
+  loadPaymentSettings();
+}
+
+function savePaymentSettings() {
+  const paymentSettings = {
+    mbway: {
+      number: document.getElementById('mbwayNumber').value,
+      enabled: document.getElementById('mbwayEnabled').checked
+    },
+    transfer: {
+      bank: document.getElementById('bankName').value,
+      iban: document.getElementById('bankIban').value,
+      nif: document.getElementById('bankNif').value,
+      enabled: document.getElementById('transferEnabled').checked
+    }
+  };
+
+  localStorage.setItem('paymentSettings', JSON.stringify(paymentSettings));
+  alert('Configurações de pagamento salvas com sucesso!');
+}
+
+// Carregar configurações ao iniciar a página
+document.addEventListener('DOMContentLoaded', function() {
+  // ... existing code ...
+  loadPaymentSettings();
+});
+
+// Função para atualizar o dashboard
+function updateDashboard() {
+  const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+  const now = new Date();
+  
+  // Atualizar estatísticas
+  const activeStories = stories.filter(s => s.status === 'approved' && new Date(s.expirationDate) > now);
+  const pendingStories = stories.filter(s => s.status === 'pending' || s.status === 'pending_payment');
+  const totalValue = pendingStories.reduce((sum, s) => sum + s.paymentAmount, 0);
+  
+  document.getElementById('totalStories').textContent = activeStories.length;
+  document.getElementById('storiesPendentes').textContent = pendingStories.length;
+  document.getElementById('totalPagamentos').textContent = `€${totalValue.toFixed(2)}`;
+  
+  // Atualizar tabela de stories pendentes
+  const pendingTable = document.getElementById('pendingStoriesTable');
+  pendingTable.innerHTML = '';
+  
+  pendingStories.forEach(story => {
+    const row = document.createElement('tr');
+    const statusClass = story.status === 'pending_payment' ? 'warning' : 'info';
+    const statusText = story.status === 'pending_payment' ? 'Aguardando Pagamento' : 'Aguardando Aprovação';
+    const duration = story.isPremium ? '15 dias' : '7 dias';
+    
+    row.innerHTML = `
+      <td>
+        ${story.title}
+        ${story.isPremium ? '<span class="badge bg-warning ms-2"><i class="fas fa-crown"></i> Premium</span>' : ''}
+      </td>
+      <td>${story.category}</td>
+      <td>€${story.paymentAmount.toFixed(2)}</td>
+      <td>${duration}</td>
+      <td><span class="badge bg-${statusClass}">${statusText}</span></td>
+      <td>${new Date(story.submissionDate).toLocaleDateString()}</td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-info" onclick="viewStory(${story.id})" title="Ver Detalhes">
+            <i class="fas fa-eye"></i>
+          </button>
+          ${story.status === 'pending_payment' ? `
+            <button class="btn btn-sm btn-success" onclick="confirmPayment(${story.id})" title="Confirmar Pagamento">
+              <i class="fas fa-check"></i>
+            </button>
+          ` : `
+            <button class="btn btn-sm btn-success" onclick="approveStory(${story.id})" title="Aprovar">
+              <i class="fas fa-check"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="rejectStory(${story.id})" title="Rejeitar">
+              <i class="fas fa-times"></i>
+            </button>
+          `}
+        </div>
+      </td>
+    `;
+    pendingTable.appendChild(row);
+  });
+  
+  // Atualizar tabela de stories ativos
+  const activeTable = document.getElementById('activeStoriesTable');
+  activeTable.innerHTML = '';
+  
+  activeStories.forEach(story => {
+    const expirationDate = new Date(story.expirationDate);
+    const daysLeft = Math.ceil((expirationDate - now) / (1000 * 60 * 60 * 24));
+    
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>
+        ${story.title}
+        ${story.isPremium ? '<span class="badge bg-warning ms-2"><i class="fas fa-crown"></i> Premium</span>' : ''}
+      </td>
+      <td>${story.category}</td>
+      <td>€${story.paymentAmount.toFixed(2)}</td>
+      <td>
+        <span class="badge ${daysLeft <= 3 ? 'bg-danger' : 'bg-success'}">
+          ${daysLeft} dias
+        </span>
+      </td>
+      <td><span class="badge bg-success">Ativo</span></td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-info" onclick="viewStory(${story.id})" title="Ver Detalhes">
+            <i class="fas fa-eye"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="deleteStory(${story.id})" title="Excluir">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </td>
+    `;
+    activeTable.appendChild(row);
+  });
+}
+
+// Atualizar dashboard quando a seção for mostrada
+document.querySelector('a[onclick="showSection(\'dashboard\')"]').addEventListener('click', updateDashboard);
+
+// Atualizar dashboard a cada minuto
+setInterval(updateDashboard, 60000);
+
+// Atualizar dashboard ao iniciar a página
+document.addEventListener('DOMContentLoaded', function() {
+  // ... existing code ...
+  updateDashboard();
+});
+
+// Função para copiar texto para a área de transferência
+function copyToClipboard(elementId) {
+  const element = document.getElementById(elementId);
+  element.select();
+  document.execCommand('copy');
+  
+  // Feedback visual
+  const button = element.nextElementSibling;
+  const originalIcon = button.innerHTML;
+  button.innerHTML = '<i class="fas fa-check"></i>';
+  setTimeout(() => {
+    button.innerHTML = originalIcon;
+  }, 2000);
+}
+
+// Função para carregar informações de pagamento no dashboard
+function loadDashboardPaymentInfo() {
+  const paymentSettings = JSON.parse(localStorage.getItem('paymentSettings') || JSON.stringify({
+    mbway: {
+      number: '912 345 678',
+      enabled: true
+    },
+    transfer: {
+      bank: 'Banco Exemplo',
+      iban: 'PT50 1234 5678 9012 3456 7890 1',
+      nif: '123 456 789',
+      enabled: true
+    }
+  }));
+
+  // Preencher campos MBWay
+  document.getElementById('dashboardMbwayNumber').value = paymentSettings.mbway.number;
+  document.getElementById('dashboardMbwayEnabled').checked = paymentSettings.mbway.enabled;
+
+  // Preencher campos Transferência
+  document.getElementById('dashboardBankName').value = paymentSettings.transfer.bank;
+  document.getElementById('dashboardBankIban').value = paymentSettings.transfer.iban;
+  document.getElementById('dashboardBankNif').value = paymentSettings.transfer.nif;
+  document.getElementById('dashboardTransferEnabled').checked = paymentSettings.transfer.enabled;
+}
+
+// Função para salvar informações de pagamento
+function savePaymentInfo() {
+  const paymentSettings = {
+    mbway: {
+      number: document.getElementById('dashboardMbwayNumber').value,
+      enabled: document.getElementById('dashboardMbwayEnabled').checked
+    },
+    transfer: {
+      bank: document.getElementById('dashboardBankName').value,
+      iban: document.getElementById('dashboardBankIban').value,
+      nif: document.getElementById('dashboardBankNif').value,
+      enabled: document.getElementById('dashboardTransferEnabled').checked
+    }
+  };
+
+  localStorage.setItem('paymentSettings', JSON.stringify(paymentSettings));
+  alert('Informações de pagamento salvas com sucesso!');
+}
+
+// Atualizar dashboard quando a seção for mostrada
+document.querySelector('a[onclick="showSection(\'dashboard\')"]').addEventListener('click', function() {
+  updateDashboard();
+  loadDashboardPaymentInfo();
+});
+
+// Carregar informações de pagamento ao iniciar a página
+document.addEventListener('DOMContentLoaded', function() {
+  // ... existing code ...
+  loadDashboardPaymentInfo();
+});
+</script>
+
+<footer style="background:#f8f9fa; border-top:1px solid #dee2e6; padding:30px 0; margin-top:40px; text-align:center;">
+  <div class="container">
+    <nav>
+      <a href="index.html">Página Inicial</a> |
+      <a href="promover.html">Promover</a> |
+      <a href="sobre.html">Sobre</a> |
+      <a href="cadastro.html">Cadastro</a> |
+      <a href="termos.html">Termos de Uso</a> |
+      <a href="admin.html">Admin</a>
+    </nav>
+    <div style="margin-top:10px; color:#888; font-size:14px;">&copy; 2024 Classificados de Promover</div>
+  </div>
+</footer>
+
+</body>
+</html> 

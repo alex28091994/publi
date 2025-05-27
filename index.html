@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+  <meta name="description" content="Portal de classificados de promover - Encontre os melhores profissionais para seu projeto">
+  
+  <title>Negocio Feito - Encontre Profissionais</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=X6kQe1">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=X6kQe1" type="text/css">
+
+  <style>
+    .filter-section {
+      background-color: #f8f9fa;
+      padding: 20px 0;
+      margin-top: 120px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .filter-btn {
+      margin: 5px;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background-color: #007bff;
+      color: white;
+    }
+    
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      margin-bottom: 30px;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px 15px 0 0;
+    }
+    
+    .card-body {
+      padding: 20px;
+    }
+    
+    .price-tag {
+      background-color: #28a745;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    
+    .rating {
+      color: #ffc107;
+    }
+    
+    .contact-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .contact-btn {
+      flex: 1;
+      border-radius: 20px;
+      padding: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-btn.whatsapp {
+      background-color: #25D366;
+      border-color: #25D366;
+    }
+    
+    .contact-btn.whatsapp:hover {
+      background-color: #128C7E;
+      border-color: #128C7E;
+    }
+    
+    .contact-btn.phone {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    
+    .contact-btn.phone:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+    
+    .contact-btn i {
+      margin-right: 8px;
+    }
+
+    .phone-number {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    .search-box {
+      border-radius: 20px;
+      padding: 8px 20px;
+      border: 1px solid #dee2e6;
+      width: 250px;
+      margin-right: 15px;
+      font-size: 14px;
+    }
+    
+    .search-box:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+    }
+
+    @media (max-width: 991px) {
+      .search-container {
+        margin: 10px 0;
+        width: 100%;
+      }
+      .search-box {
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+
+    .stories-wrapper::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .stories-wrapper::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .stories-wrapper::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    .stories-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .story-item {
+      cursor: pointer;
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .story-item:hover {
+      transform: scale(1.05);
+    }
+
+    .story-circle {
+      transition: all 0.3s ease;
+    }
+
+    .story-circle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .premium-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: white;
+      padding: 4px;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 1;
+      border: 2px solid white;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .premium-badge i {
+      font-size: 10px;
+    }
+
+    /* Estilos para o carousel */
+    .carousel-item img {
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .carousel-indicators {
+      margin-bottom: 0.5rem;
+    }
+
+    .carousel-indicators button {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin: 0 3px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .carousel-indicators button.active {
+      background-color: #007bff;
+    }
+
+    /* Estilos para o modal dos stories */
+    .story-modal .modal-content {
+      border-radius: 15px;
+      border: none;
+    }
+
+    .story-modal .modal-header {
+      border-bottom: none;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .story-modal .modal-body {
+      padding: 0;
+    }
+
+    .story-modal .story-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .story-modal .story-info {
+      padding: 1.5rem;
+    }
+
+    .story-modal .story-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .story-modal .story-description {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .story-modal .story-price {
+      background-color: #28a745;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    .story-modal .contact-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .story-modal .contact-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 25px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .story-modal .contact-btn i {
+      margin-right: 8px;
+    }
+
+    .story-modal .close-btn {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .story-modal .close-btn:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Menu (igual ao da página principal) -->
+<section data-bs-version="5.1" class="menu menu5 cid-uMkCgYxcrC" once="menu" id="menu05-b">
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+    <div class="container">
+      <div class="navbar-brand">
+        <span class="navbar-logo">
+          <a href="promover.html">
+            <img src="assets/images/logo.png" alt="Negocio Feito" style="height: 4.3rem;">
+          </a>
+        </span>
+        <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="promover.html">Negocio Feito</a></span>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4 active" href="promover.html">Promover</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4" href="sobre.html">Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4" href="cadastro.html">Cadastro</a>
+          </li>
+        </ul>
+        <div class="search-container">
+          <input type="text" class="search-box" placeholder="Buscar promover...">
+        </div>
+        <div class="navbar-buttons mbr-section-btn">
+          <a class="btn btn-primary display-4" href="cadastro.html">Anunciar</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</section>
+
+<!-- Seção de Filtros e Busca -->
+<section class="filter-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <button class="btn btn-outline-primary filter-btn active">Todos</button>
+        <button class="btn btn-outline-primary filter-btn">Construção</button>
+        <button class="btn btn-outline-primary filter-btn">Domésticos</button>
+        <button class="btn btn-outline-primary filter-btn">Tecnologia</button>
+        <button class="btn btn-outline-primary filter-btn">Beleza</button>
+        <button class="btn btn-outline-primary filter-btn">Educação</button>
+        <button class="btn btn-outline-primary filter-btn">Transporte</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Seção de Stories -->
+<section class="stories-section" style="padding: 20px 0; background-color: #fff; border-bottom: 1px solid #eee;">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="stories-wrapper" style="display: flex; overflow-x: auto; padding: 10px 0; gap: 20px;">
+          <!-- Story 1 -->
+          <div class="story-item" style="text-align: center; min-width: 80px;">
+            <div class="premium-badge"><i class="fas fa-crown"></i></div>
+            <div class="story-circle" style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #007bff; padding: 3px; margin: 0 auto;">
+              <img src="assets/images/shop1.jpg" alt="Construção" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
+            <p style="margin-top: 8px; font-size: 12px; color: #333;">Construção</p>
+          </div>
+          
+          <!-- Story 2 -->
+          <div class="story-item" style="text-align: center; min-width: 80px;">
+            <div class="premium-badge"><i class="fas fa-crown"></i></div>
+            <div class="story-circle" style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #28a745; padding: 3px; margin: 0 auto;">
+              <img src="assets/images/shop2.jpg" alt="Domésticos" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
+            <p style="margin-top: 8px; font-size: 12px; color: #333;">Domésticos</p>
+          </div>
+          
+          <!-- Story 3 -->
+          <div class="story-item" style="text-align: center; min-width: 80px;">
+            <div class="premium-badge"><i class="fas fa-crown"></i></div>
+            <div class="story-circle" style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #dc3545; padding: 3px; margin: 0 auto;">
+              <img src="assets/images/shop3.jpg" alt="Tecnologia" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
+            <p style="margin-top: 8px; font-size: 12px; color: #333;">Tecnologia</p>
+          </div>
+          
+          <!-- Story 4 -->
+          <div class="story-item" style="text-align: center; min-width: 80px;">
+            <div class="premium-badge"><i class="fas fa-crown"></i></div>
+            <div class="story-circle" style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #ffc107; padding: 3px; margin: 0 auto;">
+              <img src="assets/images/shop4.jpg" alt="Beleza" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
+            <p style="margin-top: 8px; font-size: 12px; color: #333;">Beleza</p>
+          </div>
+          
+          <!-- Story 5 -->
+          <div class="story-item" style="text-align: center; min-width: 80px;">
+            <div class="premium-badge"><i class="fas fa-crown"></i></div>
+            <div class="story-circle" style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #17a2b8; padding: 3px; margin: 0 auto;">
+              <img src="assets/images/shop5.jpg" alt="Educação" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
+            <p style="margin-top: 8px; font-size: 12px; color: #333;">Educação</p>
+          </div>
+          
+          <!-- Story 6 -->
+          <div class="story-item" style="text-align: center; min-width: 80px;">
+            <div class="premium-badge"><i class="fas fa-crown"></i></div>
+            <div class="story-circle" style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #6f42c1; padding: 3px; margin: 0 auto;">
+              <img src="assets/images/shop6.jpg" alt="Transporte" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
+            <p style="margin-top: 8px; font-size: 12px; color: #333;">Transporte</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Galeria de Classificados -->
+<section class="gallery-section" style="padding: 40px 0;">
+  <div class="container">
+    <div class="row">
+      <!-- Card 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card">
+          <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel1" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel1" data-bs-slide-to="1"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="assets/images/shop1.jpg" class="d-block w-100" alt="Serviço de Construção 1">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/images/shop2.jpg" class="d-block w-100" alt="Serviço de Construção 2">
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="card-title mb-0">Pedreiro Profissional</h5>
+              <span class="price-tag">€ 15/hora</span>
+            </div>
+            <p class="card-text">Especialista em reformas e construções residenciais. Mais de 10 anos de experiência.</p>
+            <div class="rating mb-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span class="text-muted ms-2">(4.5)</span>
+            </div>
+            <div class="contact-buttons">
+              <button class="btn contact-btn whatsapp" onclick="window.open('https://wa.me/5511999999999?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20seu%20serviço')">
+                <i class="fab fa-whatsapp"></i>WhatsApp
+              </button>
+              <button class="btn contact-btn phone" onclick="togglePhone(this, '11999999999')">
+                <i class="fas fa-phone"></i>Telefone
+              </button>
+            </div>
+            <div class="phone-number" id="phone-11999999999"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card">
+          <div id="carousel2" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel2" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel2" data-bs-slide-to="1"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="assets/images/shop2.jpg" class="d-block w-100" alt="Serviço Doméstico 1">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/images/shop3.jpg" class="d-block w-100" alt="Serviço Doméstico 2">
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="card-title mb-0">Limpeza Residencial</h5>
+              <span class="price-tag">€ 30/dia</span>
+            </div>
+            <p class="card-text">Serviço completo de limpeza residencial. Produtos e equipamentos inclusos.</p>
+            <div class="rating mb-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <span class="text-muted ms-2">(4.0)</span>
+            </div>
+            <div class="contact-buttons">
+              <button class="btn contact-btn whatsapp" onclick="window.open('https://wa.me/5511988888888?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20seu%20serviço')">
+                <i class="fab fa-whatsapp"></i>WhatsApp
+              </button>
+              <button class="btn contact-btn phone" onclick="togglePhone(this, '11988888888')">
+                <i class="fas fa-phone"></i>Telefone
+              </button>
+            </div>
+            <div class="phone-number" id="phone-11988888888"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card">
+          <div id="carousel3" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel3" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel3" data-bs-slide-to="1"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="assets/images/shop3.jpg" class="d-block w-100" alt="Serviço de Tecnologia 1">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/images/shop4.jpg" class="d-block w-100" alt="Serviço de Tecnologia 2">
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="card-title mb-0">Suporte Técnico</h5>
+              <span class="price-tag">€ 20/hora</span>
+            </div>
+            <p class="card-text">Manutenção de computadores e notebooks. Formatação e instalação de programas.</p>
+            <div class="rating mb-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span class="text-muted ms-2">(5.0)</span>
+            </div>
+            <div class="contact-buttons">
+              <button class="btn contact-btn whatsapp" onclick="window.open('https://wa.me/5511977777777?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20seu%20serviço')">
+                <i class="fab fa-whatsapp"></i>WhatsApp
+              </button>
+              <button class="btn contact-btn phone" onclick="togglePhone(this, '11977777777')">
+                <i class="fas fa-phone"></i>Telefone
+              </button>
+            </div>
+            <div class="phone-number" id="phone-11977777777"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adicione mais cards conforme necessário -->
+    </div>
+  </div>
+</section>
+
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script>
+<script src="assets/ytplayer/index.js"></script>
+<script src="assets/dropdown/js/navbar-dropdown.js"></script>
+<script src="assets/theme/js/script.js"></script>
+
+<script>
+// Script para filtros
+document.querySelectorAll('.filter-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    // Remove active class from all buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    // Add active class to clicked button
+    this.classList.add('active');
+    // Aqui você pode adicionar a lógica de filtro
+  });
+});
+
+// Script para busca
+document.querySelector('.search-box').addEventListener('input', function(e) {
+  // Aqui você pode adicionar a lógica de busca
+  console.log('Buscando:', e.target.value);
+});
+
+// Função para mostrar/esconder o número de telefone
+function togglePhone(button, phoneNumber) {
+  const phoneElement = document.getElementById(`phone-${phoneNumber}`);
+  const allPhoneElements = document.querySelectorAll('.phone-number');
+  
+  // Esconde todos os outros números de telefone
+  allPhoneElements.forEach(element => {
+    if (element !== phoneElement) {
+      element.style.display = 'none';
+    }
+  });
+  
+  // Alterna a visibilidade do número de telefone clicado
+  if (phoneElement.style.display === 'block') {
+    phoneElement.style.display = 'none';
+    button.innerHTML = '<i class="fas fa-phone"></i>Telefone';
+  } else {
+    phoneElement.style.display = 'block';
+    phoneElement.textContent = formatPhoneNumber(phoneNumber);
+    button.innerHTML = '<i class="fas fa-phone"></i>Ocultar';
+  }
+}
+
+// Função para formatar o número de telefone
+function formatPhoneNumber(number) {
+  return `(${number.slice(0,2)}) ${number.slice(2,7)}-${number.slice(7)}`;
+}
+
+// Dados dos stories
+const storiesData = {
+  construcao: {
+    title: "Construção",
+    image: "assets/images/shop1.jpg",
+    description: "Serviços profissionais de construção, reforma e manutenção. Especialistas em alvenaria, acabamento e projetos residenciais.",
+    price: "€ 15/hora",
+    whatsapp: "5511999999999",
+    phone: "11999999999"
+  },
+  domesticos: {
+    title: "Domésticos",
+    image: "assets/images/shop2.jpg",
+    description: "Serviços domésticos completos: limpeza, organização, jardinagem e cuidados com a casa. Profissionais qualificados e confiáveis.",
+    price: "€ 30/dia",
+    whatsapp: "5511988888888",
+    phone: "11988888888"
+  },
+  tecnologia: {
+    title: "Tecnologia",
+    image: "assets/images/shop3.jpg",
+    description: "Suporte técnico especializado em computadores, smartphones e redes. Manutenção, instalação e configuração de equipamentos.",
+    price: "€ 20/hora",
+    whatsapp: "5511977777777",
+    phone: "11977777777"
+  },
+  beleza: {
+    title: "Beleza",
+    image: "assets/images/shop4.jpg",
+    description: "Serviços de beleza e estética: cabelo, unhas, maquiagem e tratamentos estéticos. Profissionais certificados e produtos de qualidade.",
+    price: "€ 25/hora",
+    whatsapp: "5511966666666",
+    phone: "11966666666"
+  },
+  educacao: {
+    title: "Educação",
+    image: "assets/images/shop5.jpg",
+    description: "Aulas particulares e cursos em diversas áreas. Professores qualificados para ensino fundamental, médio e superior.",
+    price: "€ 18/hora",
+    whatsapp: "5511955555555",
+    phone: "11955555555"
+  },
+  transporte: {
+    title: "Transporte",
+    image: "assets/images/shop6.jpg",
+    description: "Serviços de transporte e entrega. Motoristas profissionais para viagens, mudanças e entregas rápidas e seguras.",
+    price: "€ 35/dia",
+    whatsapp: "5511944444444",
+    phone: "11944444444"
+  }
+};
+
+// Função para abrir o modal do story
+function openStoryModal(category) {
+  const storyData = storiesData[category];
+  if (!storyData) return;
+
+  // Atualiza o conteúdo do modal
+  document.getElementById('modalStoryImage').src = storyData.image;
+  document.getElementById('modalStoryTitle').textContent = storyData.title;
+  document.getElementById('modalStoryDescription').textContent = storyData.description;
+  document.getElementById('modalStoryPrice').textContent = storyData.price;
+  
+  // Configura os botões de contato
+  const whatsappBtn = document.getElementById('modalWhatsApp');
+  const phoneBtn = document.getElementById('modalPhone');
+  const phoneNumber = document.getElementById('modalPhoneNumber');
+  
+  whatsappBtn.onclick = () => window.open(`https://wa.me/${storyData.whatsapp}?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20seu%20serviço`);
+  phoneBtn.onclick = () => toggleModalPhone(phoneNumber, storyData.phone);
+  
+  // Abre o modal
+  const modal = new bootstrap.Modal(document.getElementById('storyModal'));
+  modal.show();
+}
+
+// Função para mostrar/esconder o número de telefone no modal
+function toggleModalPhone(phoneElement, phoneNumber) {
+  if (phoneElement.style.display === 'block') {
+    phoneElement.style.display = 'none';
+    document.getElementById('modalPhone').innerHTML = '<i class="fas fa-phone"></i>Telefone';
+  } else {
+    phoneElement.style.display = 'block';
+    phoneElement.textContent = formatPhoneNumber(phoneNumber);
+    document.getElementById('modalPhone').innerHTML = '<i class="fas fa-phone"></i>Ocultar';
+  }
+}
+
+// Adiciona eventos de clique aos stories
+document.querySelectorAll('.story-item').forEach(item => {
+  item.addEventListener('click', function() {
+    const category = this.querySelector('p').textContent.toLowerCase();
+    openStoryModal(category);
+  });
+});
+</script>
+
+<!-- Modal para Stories -->
+<div class="modal fade story-modal" id="storyModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="" class="story-image" id="modalStoryImage">
+        <div class="story-info">
+          <h3 class="story-title" id="modalStoryTitle"></h3>
+          <span class="story-price" id="modalStoryPrice"></span>
+          <p class="story-description" id="modalStoryDescription"></p>
+          <div class="contact-buttons">
+            <button class="btn contact-btn whatsapp" id="modalWhatsApp">
+              <i class="fab fa-whatsapp"></i>WhatsApp
+            </button>
+            <button class="btn contact-btn phone" id="modalPhone">
+              <i class="fas fa-phone"></i>Telefone
+            </button>
+          </div>
+          <div class="phone-number mt-3" id="modalPhoneNumber"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html> 

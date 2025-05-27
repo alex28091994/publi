@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+  <meta name="description" content="Cadastre-se e ofereça seus trabalhos - Classificados de Promover">
+  
+  <title>Cadastro - Negocio Feito</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=X6kQe1">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=X6kQe1" type="text/css">
+
+  <style>
+    .form-section {
+      padding: 40px 0;
+      margin-top: 120px;
+      background-color: #f8f9fa;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
+
+    .form-title {
+      color: #333;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid #dee2e6;
+    }
+
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+    .btn-submit {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    .required-field::after {
+      content: "*";
+      color: #dc3545;
+      margin-left: 4px;
+    }
+
+    .photo-upload {
+      border: 2px dashed #dee2e6;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .photo-upload:hover {
+      border-color: #007bff;
+      background-color: #f8f9fa;
+    }
+
+    .photo-preview {
+      max-width: 200px;
+      max-height: 200px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .service-category {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .category-checkbox {
+      display: none;
+    }
+
+    .category-label {
+      padding: 8px 15px;
+      border-radius: 20px;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-checkbox:checked + .category-label {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .progress-steps::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #dee2e6;
+      z-index: 1;
+    }
+
+    .step {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: white;
+      border: 2px solid #dee2e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step.active {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: white;
+    }
+
+    .step.completed {
+      background-color: #28a745;
+      border-color: #28a745;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Menu (igual ao da página principal) -->
+<section data-bs-version="5.1" class="menu menu5 cid-uMkCgYxcrC" once="menu" id="menu05-b">
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+    <div class="container">
+      <div class="navbar-brand">
+        <span class="navbar-logo">
+          <a href="promover.html">
+            <img src="assets/images/logo.png" alt="Negocio Feito" style="height: 4.3rem;">
+          </a>
+        </span>
+        <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="promover.html">Negocio Feito</a></span>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4" href="promover.html">Promover</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4" href="sobre.html">Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4 active" href="cadastro.html">Cadastro</a>
+          </li>
+        </ul>
+        <div class="navbar-buttons mbr-section-btn">
+          <a class="btn btn-primary display-4" href="cadastro.html">Anunciar</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</section>
+
+<!-- Seção do Formulário -->
+<section class="form-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <div class="form-container">
+          <!-- Progress Steps -->
+          <div class="progress-steps">
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+          </div>
+
+          <h2 class="form-title">Cadastre seu Trabalho</h2>
+          
+          <form id="cadastroForm" onsubmit="return false;">
+            <!-- Informações da Empresa -->
+            <div class="form-group">
+              <label class="form-label required-field">Nome da Empresa</label>
+              <input type="text" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label required-field">Telefone</label>
+              <input type="tel" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label required-field">WhatsApp</label>
+              <input type="tel" class="form-control" required>
+            </div>
+
+            <!-- Categoria e Título do Serviço -->
+            <div class="form-group">
+              <label class="form-label required-field">Categoria do Serviço</label>
+              <select class="form-select" id="categoriaSelect" required onchange="updateProfissoes()">
+                <option value="">Selecione uma categoria</option>
+                <option value="construcao">Construção</option>
+                <option value="domesticos">Domésticos</option>
+                <option value="tecnologia">Tecnologia</option>
+                <option value="beleza">Beleza</option>
+                <option value="educacao">Educação</option>
+                <option value="transporte">Transporte</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label required-field">Título do Serviço</label>
+              <select class="form-select" id="profissaoSelect" required>
+                <option value="">Selecione primeiro uma categoria</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label required-field">Descrição do Serviço</label>
+              <textarea class="form-control" rows="4" placeholder="Descreva seus serviços, experiência e especialidades" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label required-field">Valor do Serviço</label>
+              <div class="input-group">
+                <span class="input-group-text">€</span>
+                <input type="number" class="form-control" placeholder="0.00" step="0.01" required>
+                <select class="form-select" style="max-width: 120px;">
+                  <option value="hora">/hora</option>
+                  <option value="dia">/dia</option>
+                  <option value="servico">/serviço</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Upload de Fotos -->
+            <div class="form-group">
+              <label class="form-label required-field">Fotos do Serviço</label>
+              <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                <p class="mb-0">Clique para adicionar fotos</p>
+                <p class="text-muted small">Máximo 2 fotos (JPG, PNG)</p>
+                <input type="file" id="photoInput" accept="image/*" multiple style="display: none;" onchange="previewPhotos(this)">
+                <img id="photoPreview1" class="photo-preview">
+                <img id="photoPreview2" class="photo-preview">
+              </div>
+            </div>
+
+            <!-- Área de Atuação -->
+            <div class="form-group">
+              <label class="form-label required-field">Área de Atuação</label>
+              <input type="text" class="form-control" placeholder="Ex: Zona Sul de São Paulo" required>
+            </div>
+
+            <button type="submit" class="btn btn-submit">Cadastrar Serviço</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#f8f9fa; border-top:1px solid #dee2e6; padding:30px 0; margin-top:40px; text-align:center;">
+  <div class="container">
+    <nav>
+      <a href="index.html">Página Inicial</a> |
+      <a href="promover.html">Promover</a> |
+      <a href="sobre.html">Sobre</a> |
+      <a href="cadastro.html">Cadastro</a> |
+      <a href="termos.html">Termos de Uso</a>
+    </nav>
+    <div style="margin-top:10px; color:#888; font-size:14px;">&copy; 2024 Negocio Feito</div>
+  </div>
+</footer>
+
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script>
+<script src="assets/ytplayer/index.js"></script>
+<script src="assets/dropdown/js/navbar-dropdown.js"></script>
+<script src="assets/theme/js/script.js"></script>
+
+<script>
+// Função para preview das fotos
+function previewPhotos(input) {
+  const previews = document.querySelectorAll('.photo-preview');
+  previews.forEach(preview => preview.style.display = 'none');
+
+  if (input.files && input.files.length > 0) {
+    const maxFiles = Math.min(input.files.length, 2);
+    for (let i = 0; i < maxFiles; i++) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previews[i].src = e.target.result;
+        previews[i].style.display = 'block';
+      }
+      reader.readAsDataURL(input.files[i]);
+    }
+  }
+}
+
+// Validação do formulário
+document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Aqui você pode adicionar a lógica de validação e envio do formulário
+  alert('Formulário enviado com sucesso!');
+});
+
+// Máscara para telefone
+document.querySelectorAll('input[type="tel"]').forEach(input => {
+  input.addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 11) value = value.slice(0, 11);
+    
+    if (value.length > 2) {
+      value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+    }
+    if (value.length > 9) {
+      value = `${value.slice(0,9)}-${value.slice(9)}`;
+    }
+    
+    e.target.value = value;
+  });
+});
+
+// Lista de profissões por categoria
+const profissoesPorCategoria = {
+  construcao: [
+    "Pedreiro",
+    "Eletricista",
+    "Encanador",
+    "Pintor",
+    "Carpinteiro",
+    "Arquiteto",
+    "Engenheiro Civil",
+    "Mestre de Obras",
+    "Gesseiro",
+    "Azulejista"
+  ],
+  domesticos: [
+    "Diarista",
+    "Cozinheira",
+    "Babá",
+    "Cuidador de Idosos",
+    "Jardineiro",
+    "Lavadeira",
+    "Passadeira",
+    "Faxineira",
+    "Copeira",
+    "Auxiliar de Limpeza"
+  ],
+  tecnologia: [
+    "Desenvolvedor Web",
+    "Técnico de Informática",
+    "Designer Gráfico",
+    "Suporte Técnico",
+    "Programador",
+    "Analista de Sistemas",
+    "Técnico de Redes",
+    "Consultor de TI",
+    "Manutenção de Computadores",
+    "Instalador de Câmeras"
+  ],
+  beleza: [
+    "Cabeleireiro",
+    "Manicure",
+    "Barbeiro",
+    "Maquiador",
+    "Esteticista",
+    "Massagista",
+    "Depiladora",
+    "Designer de Sobrancelhas",
+    "Tatuador",
+    "Consultor de Imagem"
+  ],
+  educacao: [
+    "Professor Particular",
+    "Instrutor de Idiomas",
+    "Professor de Música",
+    "Aulas de Dança",
+    "Professor de Artes",
+    "Aulas de Culinária",
+    "Professor de Informática",
+    "Aulas de Yoga",
+    "Professor de Matemática",
+    "Aulas de Esportes"
+  ],
+  transporte: [
+    "Motorista Particular",
+    "Entregador",
+    "Transportador de Cargas",
+    "Motorista de Aplicativo",
+    "Mensageiro",
+    "Transporte Escolar",
+    "Motorista de Van",
+    "Transporte de Mudanças",
+    "Motorista de Caminhão",
+    "Transporte Executivo"
+  ]
+};
+
+// Função para atualizar a lista de profissões baseada na categoria selecionada
+function updateProfissoes() {
+  const categoriaSelect = document.getElementById('categoriaSelect');
+  const profissaoSelect = document.getElementById('profissaoSelect');
+  const categoria = categoriaSelect.value;
+
+  // Limpa as opções atuais
+  profissaoSelect.innerHTML = '<option value="">Selecione uma profissão</option>';
+
+  if (categoria && profissoesPorCategoria[categoria]) {
+    profissoesPorCategoria[categoria].forEach(profissao => {
+      const option = document.createElement('option');
+      option.value = profissao.toLowerCase().replace(/\s+/g, '-');
+      option.textContent = profissao;
+      profissaoSelect.appendChild(option);
+    });
+  }
+}
+</script>
+
+</body>
+</html> 

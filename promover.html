@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+  <meta name="description" content="Promova seu trabalho - Cadastre seu story para aprovação">
+  
+  <title>Promover Trabalho - Negocio Feito</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=X6kQe1">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=X6kQe1" type="text/css">
+
+  <style>
+    .promote-section {
+      padding: 120px 0 60px;
+      background-color: #f8f9fa;
+    }
+
+    /* Sobrescrevendo cores do Bootstrap */
+    .table-primary,
+    .alert-primary,
+    .list-group-item-primary,
+    .bg-primary {
+      background-color: #2c5089 !important;
+    }
+
+    .text-primary {
+      color: #2c5089 !important;
+    }
+
+    .border-primary {
+      border-color: #2c5089 !important;
+    }
+
+    .form-control:focus {
+      border-color: #2c5089 !important;
+      box-shadow: 0 0 0 0.2rem rgba(44, 80, 137, 0.25) !important;
+    }
+
+    .form-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .form-title {
+      color: #333;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 12px;
+      border: 1px solid #dee2e6;
+    }
+
+    .premium-option {
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      background-color: #fffdf0;
+    }
+
+    .premium-badge {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .status-badge {
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .status-pending {
+      background-color: #ffc107;
+      color: #000;
+    }
+
+    .status-approved {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .status-rejected {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .image-preview {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin: 10px;
+      border: 2px dashed #dee2e6;
+    }
+
+    .image-preview-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .story-list {
+      margin-top: 40px;
+    }
+
+    .story-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .story-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .story-info {
+      margin-bottom: 15px;
+    }
+
+    .story-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .story-description {
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .story-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .story-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .btn-action {
+      flex: 1;
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .btn-edit {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background-color: #c82333;
+      color: white;
+    }
+
+    .terms-check {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 20px;
+      background: linear-gradient(45deg, #007bff, #0056b3);
+      border: none;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Menu -->
+<section data-bs-version="5.1" class="menu menu5 cid-uMkCgYxcrC" once="menu" id="menu05-b">
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+    <div class="container">
+      <div class="navbar-brand">
+        <span class="navbar-logo">
+          <a href="index.html">
+            <img src="assets/images/logo.png" alt="Negocio Feito" style="height: 4.3rem;">
+          </a>
+        </span>
+        <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="index.html">Negocio Feito</a></span>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4 active" href="promover.html">Promover</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4" href="sobre.html">Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link text-black display-4" href="cadastro.html">Cadastro</a>
+          </li>
+        </ul>
+        <div class="navbar-buttons mbr-section-btn">
+          <a class="btn btn-primary display-4" href="cadastro.html">Anunciar</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</section>
+
+<!-- Formulário de Promoção -->
+<section class="promote-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="form-card">
+          <h2 class="form-title">Promova seu Trabalho</h2>
+          
+          <!-- Formulário de Story -->
+          <form id="storyForm" onsubmit="submitStory(event)">
+            <!-- Informações Básicas -->
+            <div class="mb-4">
+              <label class="form-label">Título do Trabalho *</label>
+              <input type="text" class="form-control" id="title" required 
+                     placeholder="Ex: Trabalhos de Construção Civil">
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Categoria *</label>
+              <select class="form-control" id="category" required>
+                <option value="">Selecione uma categoria</option>
+                <option value="construcao">Construção</option>
+                <option value="domesticos">Domésticos</option>
+                <option value="tecnologia">Tecnologia</option>
+                <option value="beleza">Beleza</option>
+                <option value="educacao">Educação</option>
+                <option value="transporte">Transporte</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Descrição *</label>
+              <textarea class="form-control" id="description" rows="4" required
+                        placeholder="Descreva seu trabalho em detalhes..."></textarea>
+            </div>
+
+            <!-- Contato -->
+            <div class="row mb-4">
+              <div class="col-md-4">
+                <label class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" required
+                       placeholder="seu@email.com">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Telefone *</label>
+                <input type="tel" class="form-control" id="phone" required
+                       placeholder="+351 XXX XXX XXX">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">WhatsApp *</label>
+                <input type="tel" class="form-control" id="whatsapp" required
+                       placeholder="+351 XXX XXX XXX">
+              </div>
+            </div>
+
+            <!-- Imagens -->
+            <div class="mb-4">
+              <label class="form-label">Imagem do Trabalho *</label>
+              <input type="file" class="form-control" id="images" accept="image/*" required
+                     onchange="previewImages(event)">
+              <div class="image-preview-container" id="imagePreview"></div>
+              <small class="text-muted">Tamanho máximo: 2MB</small>
+            </div>
+
+            <!-- Opção Premium -->
+            <div class="premium-option">
+              <span class="premium-badge"><i class="fas fa-crown"></i> Premium</span>
+              <div class="mb-4">
+                <label class="form-label">Valor do Story *</label>
+                <select class="form-control" id="storyValue" onchange="updatePaymentInfo()">
+                  <option value="">Selecione uma opção</option>
+                  <!-- Será preenchido via JavaScript -->
+                </select>
+              </div>
+
+              <div id="customValueDiv" style="display: none;" class="mb-4">
+                <label class="form-label">Valor Personalizado (€) *</label>
+                <input type="number" class="form-control" id="customValue" min="5" step="0.01" 
+                       onchange="updatePaymentInfo()" placeholder="Digite o valor desejado">
+                <small class="text-muted">Valor mínimo: €5,00</small>
+              </div>
+              
+              <!-- Informações de Pagamento -->
+              <div id="paymentInfo">
+                <div class="alert alert-info">
+                  <h5><i class="fas fa-info-circle"></i> Informações de Pagamento</h5>
+                  <p class="mb-2">Valor a pagar: <strong id="paymentAmount">€5,00</strong></p>
+                  <p class="mb-0"><strong>Status do Pagamento:</strong> <span id="paymentStatus">Pendente</span></p>
+                </div>
+
+                <!-- Dados de Pagamento -->
+                <div class="payment-details">
+                  <div class="mb-4">
+                    <label class="form-label">Método de Pagamento *</label>
+                    <select class="form-control" id="paymentMethod" onchange="updatePaymentInstructions()">
+                      <option value="">Selecione o método de pagamento</option>
+                      <option value="mbway">MBWay</option>
+                      <option value="transfer">Transferência Bancária</option>
+                    </select>
+                  </div>
+
+                  <!-- Instruções MBWay -->
+                  <div id="mbwayInstructions" class="payment-instructions" style="display: none;">
+                    <div class="alert alert-primary">
+                      <h6><i class="fas fa-mobile-alt"></i> Instruções MBWay:</h6>
+                      <ol class="mb-0">
+                        <li>Abra o aplicativo MBWay</li>
+                        <li>Escolha "Pagar com MBWay"</li>
+                        <li>Digite o número: <strong id="mbwayNumber">912 345 678</strong></li>
+                        <li>Confirme o valor: <strong id="mbwayAmount">€5,00</strong></li>
+                        <li>Após o pagamento, anote a referência</li>
+                      </ol>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Referência MBWay *</label>
+                      <input type="text" class="form-control" id="mbwayReference" 
+                             placeholder="Digite a referência do pagamento">
+                    </div>
+                  </div>
+
+                  <!-- Instruções Transferência -->
+                  <div id="transferInstructions" class="payment-instructions" style="display: none;">
+                    <div class="alert alert-primary">
+                      <h6><i class="fas fa-university"></i> Dados Bancários:</h6>
+                      <ul class="mb-0">
+                        <li>Banco: <strong>Banco Exemplo</strong></li>
+                        <li>IBAN: <strong>PT50 1234 5678 9012 3456 7890 1</strong></li>
+                        <li>NIF: <strong>123 456 789</strong></li>
+                        <li>Valor: <strong id="transferAmount">€5,00</strong></li>
+                        <li>Referência: <strong id="transferReference">123456789</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Importante:</strong> Após o pagamento, seu story ficará pendente até a confirmação do pagamento pelo administrador.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Termos e Condições -->
+            <div class="terms-check">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                <label class="form-check-label" for="termsCheck">
+                  Li e concordo com os termos de uso e política de privacidade
+                </label>
+              </div>
+              <div class="form-check mt-2">
+                <input class="form-check-input" type="checkbox" id="approvalCheck" required>
+                <label class="form-check-label" for="approvalCheck">
+                  Entendo que o story precisa ser aprovado por um administrador após o pagamento
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span id="submitText">Enviar para Aprovação</span>
+              <span id="submitPrice" class="ms-2"></span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Lista de Stories Submetidos -->
+        <div class="story-list">
+          <h3 class="mb-4">Meus Stories</h3>
+          <div id="storiesList">
+            <!-- Stories serão inseridos aqui via JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#f8f9fa; border-top:1px solid #dee2e6; padding:30px 0; margin-top:40px; text-align:center;">
+  <div class="container">
+    <nav>
+      <a href="index.html">Página Inicial</a> |
+      <a href="promover.html">Promover</a> |
+      <a href="sobre.html">Sobre</a> |
+      <a href="cadastro.html">Cadastro</a> |
+      <a href="termos.html">Termos de Uso</a>
+    </nav>
+    <div style="margin-top:10px; color:#888; font-size:14px;">&copy; 2024 Negocio Feito</div>
+  </div>
+</footer>
+
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script>
+<script src="assets/dropdown/js/navbar-dropdown.js"></script>
+<script src="assets/theme/js/script.js"></script>
+
+<script>
+// Função para preview das imagens
+function previewImages(event) {
+  const preview = document.getElementById('imagePreview');
+  preview.innerHTML = '';
+  
+  const files = event.target.files;
+  if (files.length > 1) {
+    alert('Apenas 1 imagem é permitida');
+    event.target.value = '';
+    return;
+  }
+
+  const file = files[0];
+  if (file.size > 2 * 1024 * 1024) {
+    alert('Imagem muito grande. Tamanho máximo: 2MB');
+    event.target.value = '';
+    preview.innerHTML = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    img.className = 'image-preview';
+    preview.appendChild(img);
+  }
+  reader.readAsDataURL(file);
+}
+
+// Função para carregar opções de story
+function loadStoryOptions() {
+  const storyOptions = JSON.parse(localStorage.getItem('storyOptions') || JSON.stringify([
+    { type: 'normal', value: 5, duration: 7, enabled: true },
+    { type: 'premium', value: 15, duration: 15, enabled: true }
+  ]));
+
+  const select = document.getElementById('storyValue');
+  select.innerHTML = '<option value="">Selecione uma opção</option>';
+
+  storyOptions.forEach(option => {
+    if (option.enabled) {
+      const opt = document.createElement('option');
+      opt.value = option.value;
+      opt.textContent = `${option.type === 'premium' ? 'Premium' : 'Normal'} - €${option.value.toFixed(2)} (${option.duration} dias)`;
+      opt.dataset.duration = option.duration;
+      opt.dataset.type = option.type;
+      select.appendChild(opt);
+    }
+  });
+
+  // Adicionar opção personalizada
+  const customOpt = document.createElement('option');
+  customOpt.value = 'custom';
+  customOpt.textContent = 'Outro Valor';
+  select.appendChild(customOpt);
+}
+
+// Função para carregar configurações de pagamento
+function loadPaymentSettings() {
+  const paymentSettings = JSON.parse(localStorage.getItem('paymentSettings') || JSON.stringify({
+    mbway: {
+      number: '912 345 678',
+      enabled: true
+    },
+    transfer: {
+      bank: 'Banco Exemplo',
+      iban: 'PT50 1234 5678 9012 3456 7890 1',
+      nif: '123 456 789',
+      enabled: true
+    }
+  }));
+
+  const paymentMethod = document.getElementById('paymentMethod');
+  paymentMethod.innerHTML = '<option value="">Selecione o método de pagamento</option>';
+
+  if (paymentSettings.mbway.enabled) {
+    const mbwayOpt = document.createElement('option');
+    mbwayOpt.value = 'mbway';
+    mbwayOpt.textContent = 'MBWay';
+    paymentMethod.appendChild(mbwayOpt);
+    document.getElementById('mbwayNumber').textContent = paymentSettings.mbway.number;
+  }
+
+  if (paymentSettings.transfer.enabled) {
+    const transferOpt = document.createElement('option');
+    transferOpt.value = 'transfer';
+    transferOpt.textContent = 'Transferência Bancária';
+    paymentMethod.appendChild(transferOpt);
+    
+    const bankInfo = document.querySelector('#transferInstructions strong');
+    bankInfo[0].textContent = paymentSettings.transfer.bank;
+    bankInfo[1].textContent = paymentSettings.transfer.iban;
+    bankInfo[2].textContent = paymentSettings.transfer.nif;
+  }
+}
+
+// Atualizar função updatePaymentInfo
+function updatePaymentInfo() {
+  const storyValue = document.getElementById('storyValue').value;
+  const customValueDiv = document.getElementById('customValueDiv');
+  const customValue = document.getElementById('customValue');
+  const selectedOption = document.getElementById('storyValue').selectedOptions[0];
+  
+  if (storyValue === 'custom') {
+    customValueDiv.style.display = 'block';
+    if (!customValue.value) {
+      customValue.value = '5';
+    }
+    updatePaymentAmount(customValue.value);
+  } else {
+    customValueDiv.style.display = 'none';
+    if (selectedOption && selectedOption.dataset.duration) {
+      updatePaymentAmount(storyValue, selectedOption.dataset.duration);
+    } else {
+      updatePaymentAmount(storyValue);
+    }
+  }
+}
+
+function updatePaymentAmount(value, duration = 7) {
+  const amount = parseFloat(value);
+  const formattedAmount = `€${amount.toFixed(2)}`;
+  
+  document.getElementById('paymentAmount').textContent = formattedAmount;
+  document.getElementById('mbwayAmount').textContent = formattedAmount;
+  document.getElementById('transferAmount').textContent = formattedAmount;
+  
+  // Atualizar data de expiração
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + duration);
+  document.getElementById('expirationDate').textContent = expirationDate.toLocaleDateString();
+}
+
+// Função para atualizar instruções de pagamento
+function updatePaymentInstructions() {
+  const method = document.getElementById('paymentMethod').value;
+  
+  // Esconder todas as instruções
+  document.querySelectorAll('.payment-instructions').forEach(el => {
+    el.style.display = 'none';
+  });
+  
+  // Mostrar instruções do método selecionado
+  if (method === 'mbway') {
+    document.getElementById('mbwayInstructions').style.display = 'block';
+  } else if (method === 'transfer') {
+    document.getElementById('transferInstructions').style.display = 'block';
+  }
+}
+
+// Função para validar pagamento
+function validatePayment() {
+  const method = document.getElementById('paymentMethod').value;
+  
+  if (!method) {
+    alert('Selecione um método de pagamento');
+    return false;
+  }
+  
+  if (method === 'mbway') {
+    const reference = document.getElementById('mbwayReference').value;
+    if (!reference) {
+      alert('Digite a referência do pagamento MBWay');
+      return false;
+    }
+  } else if (method === 'transfer') {
+    const proof = document.getElementById('transferProof').files[0];
+    if (!proof) {
+      alert('Envie o comprovativo da transferência');
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+// Função para submeter o story
+function submitStory(event) {
+  event.preventDefault();
+  
+  const form = event.target;
+  const submitBtn = document.getElementById('submitBtn');
+  const storyValue = document.getElementById('storyValue').value;
+  const amount = storyValue === 'custom' ? 
+    parseFloat(document.getElementById('customValue').value) : 
+    parseFloat(storyValue);
+
+  // Validar valor mínimo
+  if (amount < 5) {
+    alert('O valor mínimo é €5,00');
+    return;
+  }
+
+  // Validar pagamento
+  if (!validatePayment()) {
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+
+  // Simular processamento
+  setTimeout(() => {
+    // Coletar dados do formulário
+    const storyData = {
+      id: Date.now(),
+      title: form.title.value,
+      category: form.category.value,
+      description: form.description.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      whatsapp: form.whatsapp.value,
+      isPremium: amount >= 15,
+      status: 'pending_payment',
+      submissionDate: new Date().toISOString(),
+      expirationDate: new Date(Date.now() + (amount >= 15 ? 15 : 7) * 24 * 60 * 60 * 1000).toISOString(),
+      paymentStatus: 'pending',
+      paymentMethod: form.paymentMethod.value,
+      paymentAmount: amount,
+      paymentReference: form.paymentMethod.value === 'mbway' ? 
+        form.mbwayReference.value : 
+        document.getElementById('transferReference').textContent,
+      images: []
+    };
+
+    // Salvar no localStorage
+    const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+    stories.push(storyData);
+    localStorage.setItem('stories', JSON.stringify(stories));
+
+    // Resetar formulário e feedback
+    form.reset();
+    document.getElementById('imagePreview').innerHTML = '';
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Enviar para Aprovação';
+    
+    alert('Story enviado com sucesso! Aguarde a confirmação do pagamento pelo administrador.');
+    loadStories();
+  }, 2000);
+}
+
+// Função para carregar os stories
+function loadStories() {
+  const storiesList = document.getElementById('storiesList');
+  const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+  
+  storiesList.innerHTML = stories.length ? '' : '<p class="text-center">Nenhum story enviado ainda.</p>';
+  
+  stories.forEach(story => {
+    const statusClass = {
+      'pending_payment': 'status-pending',
+      'pending': 'status-pending',
+      'approved': 'status-approved',
+      'rejected': 'status-rejected'
+    }[story.status];
+
+    const statusText = {
+      'pending_payment': 'Aguardando Confirmação do Pagamento',
+      'pending': 'Aguardando Aprovação',
+      'approved': 'Aprovado',
+      'rejected': 'Rejeitado'
+    }[story.status];
+
+    const expirationDate = new Date(story.expirationDate);
+    const isExpired = expirationDate < new Date();
+
+    const card = document.createElement('div');
+    card.className = 'story-card';
+    card.innerHTML = `
+      <div class="row">
+        <div class="col-md-4">
+          <img src="${story.images[0] || 'assets/images/placeholder.jpg'}" 
+               alt="${story.title}" class="story-image">
+        </div>
+        <div class="col-md-8">
+          <div class="story-info">
+            <h4 class="story-title">
+              ${story.title}
+              ${story.isPremium ? '<span class="premium-badge ms-2"><i class="fas fa-crown"></i></span>' : ''}
+            </h4>
+            <p class="story-description">${story.description}</p>
+            <div class="story-meta">
+              <span><i class="fas fa-calendar"></i> ${new Date(story.submissionDate).toLocaleDateString()}</span>
+              <span class="status-badge ${statusClass}">${statusText}</span>
+              ${isExpired ? '<span class="status-badge status-rejected ms-2">Expirado</span>' : ''}
+            </div>
+            <div class="story-details mt-2">
+              <small class="text-muted">
+                <i class="fas fa-envelope"></i> Email: ${story.email}<br>
+                <i class="fas fa-phone"></i> Tel: ${story.phone}<br>
+                <i class="fab fa-whatsapp"></i> WhatsApp: ${story.whatsapp}<br>
+                <i class="fas fa-euro-sign"></i> Valor: €${story.paymentAmount.toFixed(2)}<br>
+                <i class="fas fa-money-bill-wave"></i> Método: ${story.paymentMethod === 'mbway' ? 'MBWay' : 'Transferência'}<br>
+                <i class="fas fa-hashtag"></i> Referência: ${story.paymentReference}<br>
+                <i class="fas fa-clock"></i> Expira em: ${expirationDate.toLocaleDateString()}
+              </small>
+            </div>
+            ${story.status === 'pending_payment' || story.status === 'pending' ? `
+              <div class="story-actions">
+                <button class="btn btn-action btn-edit" onclick="editStory(${story.id})">
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+                <button class="btn btn-action btn-delete" onclick="deleteStory(${story.id})">
+                  <i class="fas fa-trash"></i> Excluir
+                </button>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+    storiesList.appendChild(card);
+  });
+}
+
+// Função para editar story
+function editStory(id) {
+  const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+  const story = stories.find(s => s.id === id);
+  if (story) {
+    // Preencher formulário com dados do story
+    document.getElementById('title').value = story.title;
+    document.getElementById('category').value = story.category;
+    document.getElementById('description').value = story.description;
+    document.getElementById('email').value = story.email;
+    document.getElementById('phone').value = story.phone;
+    document.getElementById('whatsapp').value = story.whatsapp;
+    document.getElementById('premiumOption').checked = story.isPremium;
+    
+    // Remover story antigo
+    deleteStory(id, false);
+    
+    // Scroll para o formulário
+    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// Função para deletar story
+function deleteStory(id, showConfirm = true) {
+  if (showConfirm && !confirm('Tem certeza que deseja excluir este story?')) {
+    return;
+  }
+
+  const stories = JSON.parse(localStorage.getItem('stories') || '[]');
+  const updatedStories = stories.filter(s => s.id !== id);
+  localStorage.setItem('stories', JSON.stringify(updatedStories));
+  
+  if (showConfirm) {
+    loadStories();
+  }
+}
+
+// Carregar stories ao iniciar a página
+document.addEventListener('DOMContentLoaded', function() {
+  loadStoryOptions();
+  loadPaymentSettings();
+  loadStories();
+});
+</script>
+
+</body>
+</html> 
